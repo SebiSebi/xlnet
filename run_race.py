@@ -23,12 +23,11 @@ import absl.logging as _logging  # pylint: disable=unused-import
 import tensorflow as tf
 import sentencepiece as spm
 
-from data_utils import SEP_ID, VOCAB_SIZE, CLS_ID
-import model_utils
-import function_builder
-from classifier_utils import PaddingInputExample
-from classifier_utils import convert_single_example
-from prepro_utils import preprocess_text, encode_ids
+from xlnet.data_utils import SEP_ID, VOCAB_SIZE, CLS_ID
+from xlnet import model_utils, function_builder
+from xlnet.classifier_utils import PaddingInputExample
+from xlnet.classifier_utils import convert_single_example
+from xlnet.prepro_utils import preprocess_text, encode_ids
 
 # Model
 flags.DEFINE_string("model_config_path", default=None,

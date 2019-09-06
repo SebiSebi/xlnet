@@ -13,10 +13,9 @@ import absl.logging as _logging  # pylint: disable=unused-import
 
 import numpy as np
 
-
 import tensorflow as tf
 
-from prepro_utils import preprocess_text, encode_ids
+from xlnet.prepro_utils import preprocess_text, encode_ids
 import sentencepiece as spm
 
 

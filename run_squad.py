@@ -24,11 +24,9 @@ else:
 
 import tensorflow as tf
 import sentencepiece as spm
-from prepro_utils import preprocess_text, encode_ids, encode_pieces, printable_text
-import function_builder
-import model_utils
-import squad_utils
-from data_utils import SEP_ID, CLS_ID, VOCAB_SIZE
+from xlnet.prepro_utils import preprocess_text, encode_ids, encode_pieces, printable_text
+from xlnet import function_builder, model_utils, squad_utils
+from xlnet.data_utils import SEP_ID, CLS_ID, VOCAB_SIZE
 
 SPIECE_UNDERLINE = u'▁'
 

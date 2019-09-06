@@ -6,8 +6,9 @@ from __future__ import print_function
 import functools
 import os
 import tensorflow as tf
-import modeling
-import xlnet
+
+from xlnet import modeling
+from xlnet import xlnet
 
 
 def construct_scalar_host_call(
