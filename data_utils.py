@@ -873,42 +873,5 @@ def get_input_fn(
 
 if __name__ == "__main__":
   FLAGS = flags.FLAGS
-  flags.DEFINE_bool("use_tpu", True, help="whether to use TPUs")
-  flags.DEFINE_integer("bsz_per_host", 32, help="batch size per host.")
-  flags.DEFINE_integer("num_core_per_host", 8, help="num TPU cores per host.")
-
-  flags.DEFINE_integer("seq_len", 512,
-                       help="Sequence length.")
-  flags.DEFINE_integer("reuse_len", 256,
-                       help="Number of token that can be reused as memory. "
-                       "Could be half of `seq_len`.")
-  flags.DEFINE_bool("uncased", True, help="Use uncased inputs or not.")
-  flags.DEFINE_bool("bi_data", True,
-                    help="whether to create bidirectional data")
-  flags.DEFINE_integer("mask_alpha", default=6,
-                       help="How many tokens to form a group.")
-  flags.DEFINE_integer("mask_beta", default=1,
-                       help="How many tokens to mask within each group.")
-  flags.DEFINE_bool("use_eod", True,
-                    help="whether to append EOD at the end of a doc.")
-  flags.DEFINE_bool("from_raw_text", True,
-                    help="Whether the input is raw text or encoded ids.")
-  flags.DEFINE_integer("num_predict", default=85,
-                       help="Num of tokens to predict.")
-
-  flags.DEFINE_string("input_glob", "data/example/*.txt",
-                      help="Input file glob.")
-  flags.DEFINE_string("sp_path", "", help="Path to the sentence piece model.")
-  flags.DEFINE_string("save_dir", "proc_data/example",
-                      help="Directory for saving the processed data.")
-  flags.DEFINE_enum("split", "train", ["train", "dev", "test"],
-                    help="Save the data as which split.")
-
-  flags.DEFINE_integer("pass_id", 0, help="ID of the current pass."
-                       "Different passes sample different negative segment.")
-  flags.DEFINE_integer("num_task", 1, help="Number of total tasks.")
-  flags.DEFINE_integer("task", 0, help="The Task ID. This value is used when "
-                       "using multiple workers to identify each worker.")
-
   tf.logging.set_verbosity(tf.logging.INFO)
   tf.app.run(create_data)

@@ -6,8 +6,6 @@ import numpy as np
 import tensorflow as tf
 from xlnet.data_utils import SEP_ID, CLS_ID
 
-FLAGS = flags.FLAGS
-
 SEG_ID_A   = 0
 SEG_ID_B   = 1
 SEG_ID_CLS = 2

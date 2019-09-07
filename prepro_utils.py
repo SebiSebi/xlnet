@@ -5,8 +5,8 @@ from __future__ import print_function
 
 import unicodedata
 import six
-from functools import partial
 
+from functools import partial
 
 SPIECE_UNDERLINE = '▁'
 

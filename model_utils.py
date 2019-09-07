@@ -391,9 +391,5 @@ class AdamWeightDecayOptimizer(tf.train.Optimizer):
 
 
 if __name__ == "__main__":
-  flags.DEFINE_string("clean_input_ckpt", "", "input ckpt for cleaning")
-  flags.DEFINE_string("clean_output_model_dir", "", "output dir for cleaned ckpt")
-
   FLAGS = flags.FLAGS
-
   tf.app.run(clean_ckpt)
