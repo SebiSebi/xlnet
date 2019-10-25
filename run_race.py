@@ -245,6 +245,8 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
       batch_size = FLAGS.train_batch_size
     elif FLAGS.do_eval:
       batch_size = FLAGS.eval_batch_size
+    else:
+      batch_size = FLAGS.predict_batch_size
 
     # For training, we want a lot of parallel reading and shuffling.
     # For eval, we want no shuffling and parallel reading doesn't matter.
@@ -252,7 +254,6 @@ def file_based_input_fn_builder(input_file, seq_length, is_training,
     if is_training:
       d = d.shuffle(buffer_size=FLAGS.shuffle_buffer)
       d = d.repeat()
-      # d = d.shuffle(buffer_size=100)
 
     d = d.apply(
         tf.contrib.data.map_and_batch(
@@ -318,6 +319,22 @@ def get_model_fn():
 
       return eval_spec
 
+    elif mode == tf.estimator.ModeKeys.PREDICT:
+      label_ids = tf.reshape(features["label_ids"], [-1])
+
+      predictions = {
+          "logits": logits,
+          "labels": label_ids,
+          "is_real": features["is_real_example"]
+      }
+
+      if FLAGS.use_tpu:
+        output_spec = tf.contrib.tpu.TPUEstimatorSpec(
+            mode=mode, predictions=predictions, scaffold_fn=scaffold_fn)
+      else:
+        output_spec = tf.estimator.EstimatorSpec(
+            mode=mode, predictions=predictions)
+      return output_spec
 
     #### Configuring the optimizer
     train_op, learning_rate, _ = model_utils.get_train_op(FLAGS, total_loss)
